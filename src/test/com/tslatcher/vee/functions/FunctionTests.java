@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import com.tslatcher.vee.IllegalParameterNameException;
 import com.tslatcher.vee.Value;
 import com.tslatcher.vee.data.num.Int;
 import com.tslatcher.vee.data.num.Num;
@@ -12,7 +13,7 @@ import com.tslatcher.vee.data.num.Num;
 public class FunctionTests {
 
 	@Test
-	public void test() throws UnwiredException, TypeException {
+	public void testPlus() throws UnwiredException, TypeException, IllegalParameterNameException {
 		Plus p = new Plus();
 		Value six = new Int(6);
 		Value five = new Int(5);
@@ -20,7 +21,6 @@ public class FunctionTests {
 		p.wire("b", five);
 		Value num = p.getValue();
 		assertTrue(num instanceof Num);
-
 		assertEquals(((Num) num).getNumber(), 11.0);
 	}
 

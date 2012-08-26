@@ -1,32 +1,29 @@
 package com.tslatcher.vee.functions;
 
-import com.tslatcher.vee.FunctionInterface;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
+import com.tslatcher.vee.FunctionWrapper;
 import com.tslatcher.vee.Value;
 import com.tslatcher.vee.data.num.Num;
 
-public class Plus implements FunctionInterface {
-	Value a;
-	Value b;
+public class Plus extends FunctionWrapper {
+	public static final Set<String> parameters = new HashSet<String>(Arrays.asList(new String[] { "a", "b" }));
+
+	@Override
+	public Set<String> getParameterNames() {
+		return parameters;
+	}
 
 	@Override
 	public Value getValue() throws UnwiredException, TypeException {
-		if (a == null || b == null)
-			throw new UnwiredException();
 		try {
-			return ((Num) a.getValue()).plus((Num) b.getValue());
+			return ((Num) get("a").getValue()).plus((Num) get("b").getValue());
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new TypeException();
 		}
-
-	}
-
-	@Override
-	public void wire(String parameterName, Value parameter) {
-		if (parameterName.equals("a"))
-			a = parameter;
-		if (parameterName.equals("b"))
-			b = parameter;
 	}
 
 }

@@ -1,6 +1,7 @@
 package com.tslatcher.vee;
 
 import java.util.Map;
+import java.util.Set;
 
 import com.tslatcher.vee.functions.TypeException;
 import com.tslatcher.vee.functions.UnwiredException;
@@ -19,10 +20,20 @@ public class Function implements FunctionInterface {
 	}
 
 	@Override
-	public void wire(String parameterName, Value parameter) {
+	public void wire(String parameterName, Value parameter) throws IllegalParameterNameException {
 		Input in = new Input();
 		in.setIn(parameter);
 		inputs.put(parameterName, in);
+	}
+
+	@Override
+	public boolean mutableParameters() {
+		return true;
+	}
+
+	@Override
+	public Set<String> getParameterNames() {
+		return inputs.keySet();
 	}
 
 }
