@@ -1,17 +1,9 @@
 package com.tslatcher.vee;
 
-import com.tslatcher.vee.data.Data;
+import com.tslatcher.vee.functions.TypeException;
+import com.tslatcher.vee.functions.UnwiredException;
 
-public class Value<T extends Data> implements Argument<T> {
-	private T value;
-
-	public Value(T t) {
-		value = t;
-	}
-
-	@Override
-	public T getValue() {
-		return value;
-	}
+public interface Value {
+	public Value getValue() throws UnwiredException, TypeException;
 
 }

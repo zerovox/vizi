@@ -11,12 +11,13 @@ public class Float extends Num {
 		return "float";
 	}
 
-	public java.lang.Number getValue() {
-		return a;
+	@Override
+	public Num plus(Num num) {
+		return new Double(a + num.getNumber().doubleValue());
 	}
 
 	@Override
-	public Num plus(Num num) {
-		return new Double(a + num.getValue().doubleValue());
+	public Number getNumber() {
+		return a;
 	}
 }

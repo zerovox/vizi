@@ -13,14 +13,13 @@ public class Double extends Num {
 	}
 
 	@Override
-	public java.lang.Number getValue() {
-		// TODO Auto-generated method stub
-		return d;
+	public Num plus(Num num) {
+		return new Double(d + num.getNumber().doubleValue());
 	}
 
 	@Override
-	public Num plus(Num num) {
-		return new Double(d + num.getValue().doubleValue());
+	public Number getNumber() {
+		return d;
 	}
 
 }

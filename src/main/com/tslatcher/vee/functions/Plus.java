@@ -1,22 +1,32 @@
 package com.tslatcher.vee.functions;
 
-import com.tslatcher.vee.Argument;
+import com.tslatcher.vee.FunctionInterface;
 import com.tslatcher.vee.Value;
 import com.tslatcher.vee.data.num.Num;
 
-public class Plus extends Function<Value<Num>, Function<Argument<Num>, Value<Num>>> {
+public class Plus implements FunctionInterface {
+	Value a;
+	Value b;
 
 	@Override
-	public Function<Argument<Num>, Value<Num>> compute(Value<Num> a) throws UnwiredException {
-		if (a == null)
+	public Value getValue() throws UnwiredException, TypeException {
+		if (a == null || b == null)
 			throw new UnwiredException();
-		final Value<Num> c = a;
-		return new Function<Argument<Num>, Value<Num>>() {
+		try {
+			return ((Num) a.getValue()).plus((Num) b.getValue());
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new TypeException();
+		}
 
-			@Override
-			public Value<Num> compute(Argument<Num> a) throws UnwiredException {
-				return new Value<Num>(a.getValue().plus(c.getValue()));
-			}
-		};
 	}
+
+	@Override
+	public void wire(String parameterName, Value parameter) {
+		if (parameterName.equals("a"))
+			a = parameter;
+		if (parameterName.equals("b"))
+			b = parameter;
+	}
+
 }
